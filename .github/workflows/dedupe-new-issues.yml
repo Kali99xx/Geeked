@@ -10,7 +10,7 @@ on:
       server_url:
         description: 'PowerFixer server URL (e.g., https://your-domain.ngrok-free.dev for local testing)'
         required: true
-        default: 'https://powerfixer.warp.dev'
+        default: ''
       issue_number:
         description: 'Issue number to dedupe'
         required: true
@@ -28,7 +28,7 @@ jobs:
             echo "server_url=${{ github.event.inputs.server_url }}" >> $GITHUB_OUTPUT
             echo "issue_number=${{ github.event.inputs.issue_number }}" >> $GITHUB_OUTPUT
           else
-            echo "server_url=https://powerfixer.warp.dev" >> $GITHUB_OUTPUT
+            echo "server_url=" >> $GITHUB_OUTPUT  # Configure your own PowerFixer server URL
             echo "issue_number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
           fi
 
@@ -45,6 +45,6 @@ jobs:
             -H "X-Webhook-Api-Key: ${{ secrets.POWERFIXER_WEBHOOK_API_KEY }}" \
             -d "{
               \"issue_number\": ${ISSUE_NUMBER},
-              \"repo\": \"warpdotdev/warp\"
+              \"repo\": \"Kali99xx/Geeked\"
             }" \
             "${SERVER_URL}/api/v1/webhook/dedupe"
